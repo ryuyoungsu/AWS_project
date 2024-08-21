@@ -31,7 +31,7 @@
 </head>
 
 <body>
- <% 
+    <%
     String id = request.getParameter("id");
     String password = request.getParameter("password");
     String address = request.getParameter("address");
@@ -45,10 +45,10 @@
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String jdbcUrl = "jdbc:mysql://localhost:3306/test";
-            String dbUser = "lee";
+            String jdbcUrl = "jdbc:mysql://43.201.29.10:3307/test";
+            String dbUser = "hf";
             String dbPass = "1234";
-            
+
             conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
 
             String sql = "INSERT INTO users (id, password, address, phone) VALUES (?, ?, ?, ?)";
@@ -57,13 +57,13 @@
             pstmt.setString(2, password);
             pstmt.setString(3, address);
             pstmt.setString(4, phone);
-            
+
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-            	out.println("<script>alert('회원가입 성공!'); location.href='index.jsp';</script>");
+                out.println("<script>alert('회원가입 성공!'); location.href='index.jsp';</script>");
             } else {
-            	out.println("<script>alert('회원가입 실패!'); </script>");
+                out.println("<script>alert('회원가입 실패!'); </script>");
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -79,93 +79,104 @@
     }
     }
   %>
-  
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+ <!-- Page Preloder -->
+ <div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="header__logo">
-                       <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li class="active"><a href="./index.jsp"><span class="icon_like"></span>&ensp;High Five</a></li>                      
-                            </ul>
-                        </nav>
-                    </div>
-                    </div>
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                   <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="./index.jsp"><span class="icon_like"></span>&ensp;High Five</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="col-lg-8">
-                    <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li><a href="./index.jsp">HomePage</a></li>
-                                <li><a href="./contents.jsp">Contents</a></li>     
-                                <li> <a href="./mypage.jsp">My Page</a></li>                                                                            
-                            </ul>
-                        </nav>
-                    </div>
                 </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
-                    <a href="./join.jsp"><span class="arrow_right_alt"></span> join</a>                        
+            </div>
+            <div class="col-lg-8">
+                <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./index.jsp">HomePage</a></li>
+                            <li><a href="./contents.jsp">Contents</a></li>
+                            <li> <a href="./mypage.jsp">My Page</a></li>                                
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-2">
+
+
+                <div class="header__right">
+
+                    <% if (session.getAttribute("userId") != null) { %>
+                        <a href="mypage.jsp"><span class="arrow_right_alt"></span> Logout</a>
+                    <% } else { %>
+                         <a href="./join.jsp"><span class="arrow_right_alt"></span> join</a>            
                     <a href="./login.jsp"><span class="icon_profile"></span> Login</a>
-                    </div>
-                </div>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
-
-    <!-- Normal Breadcrumb Begin -->
-    <section class="normal-breadcrumb set-bg" data-setbg="img/ott.png">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="normal__breadcrumb__text">
-                        <h2>Join</h2>
-                       <p>Welcome to the High Five OTT</p>
-                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Normal Breadcrumb End -->
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
 
-    <!-- Signup Section Begin -->
-    <section class="signup spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="login__form">
-                        <h3>Join</h3>
-                        <form action="#">
-                            <div class="input__item">
-                                <input type="text" placeholder="Email address">
-                                <span class="icon_mail"></span>
-                            </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="Your Name">
-                                <span class="icon_profile"></span>
-                            </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="Password">
-                                <span class="icon_lock"></span>
-                            </div>
-                            <button type="submit" class="site-btn">Login Now</button>
-                        </form>
-                        <h5>Already have an account? <a href="#">Log In!</a></h5>
-                    </div>
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="img/ott.png">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Join</h2>
+                   <p>Welcome to the High Five OTT</p>
                 </div>
-                <div class="col-lg-6">
-                     <div class="login__register">
-					<div class="product__item__pic set-bg" data-setbg="img/contents/yumi.jpg">	
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+
+<!-- Signup Section Begin -->
+<section class="signup spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login__form">
+                    <h3>Join</h3>
+                    <form action="join.jsp" method="post">
+                        <div class="input__item">
+                            <input type="text" placeholder="Your id" name="id">
+                            <span class="icon_profile"></span>
+                        </div>
+                        <div class="input__item">
+                            <input type="text" placeholder="Password" name="password">
+                            <span class="icon_lock"></span>
+                        </div>
+                        <div class="input__item">
+                            <input type="text" placeholder="address" name="address">
+                            <span class="icon_lock"></span>
+                        </div>
+                        <div class="input__item">
+                            <input type="text" placeholder="Phone number" name="phone">
+                            <span class="icon_lock"></span>
+                        </div>
+
+                        <button type="submit" class="site-btn">Login Now</button>
+                    </form>
+                    <h5>Already have an account? <a href="#">Log In!</a></h5>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                 <div class="login__register">
+                    <div class="product__item__pic set-bg" data-setbg="img/contents/yumi.jpg">
                     </div>
                 </div>
             </div>
