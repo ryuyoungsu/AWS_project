@@ -31,7 +31,7 @@
 </head>
 
 <body>
-<%
+    <%
     // 폼이 제출되었는지 확인
     if ("POST".equalsIgnoreCase(request.getMethod())) {
         String id = request.getParameter("id");
@@ -42,9 +42,9 @@
         ResultSet rs = null;
 
         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-        String jdbcUrl = "jdbc:mysql://localhost:3306/test";  
-        String dbUser = "lee"; 
-        String dbPass = "1234";  
+        String jdbcUrl = "jdbc:mysql://43.201.29.10:3307/test";
+        String dbUser = "hf";
+        String dbPass = "1234";
 
         try {
             Class.forName(jdbcDriver);
@@ -81,7 +81,6 @@
             }
         }
     }
-
     // 로그아웃 동작 처리
     String action = request.getParameter("action");
     if ("logout".equals(action)) {
@@ -105,7 +104,7 @@
                        <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./index.jsp"><span class="icon_like"></span>&ensp;High Five</a></li>                      
+                                <li class="active"><a href="./index.jsp"><span class="icon_like"></span>&ensp;High Five</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -116,134 +115,141 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li><a href="./index.jsp">HomePage</a></li>
-                                <li><a href="./contents.jsp">Contents</a></li>     
-                                <li> <a href="./mypage.jsp">My Page</a></li>                                                                            
+                                <li><a href="./contents.jsp">Contents</a></li>
+                                <li> <a href="./mypage.jsp">My Page</a></li>                                
                             </ul>
                         </nav>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                    <a href="./join.jsp"><span class="arrow_right_alt"></span> join</a>                        
-                    <a href="./login.jsp"><span class="icon_profile"></span> Login</a>
-                    </div>
-                </div>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
-    
-    <!-- Normal Breadcrumb Begin -->
-    <section class="normal-breadcrumb set-bg" data-setbg="img/ott.png">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="normal__breadcrumb__text">
-                        <h2>Login</h2>
-                        <p>Welcome to the High Five OTT</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Normal Breadcrumb End -->
+                   <div class="header__right">
 
-    <!-- Login Section Begin -->
-    <section class="login spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="login__form">
-                        <h3>Login</h3>
-                        <form action="#">
-                            <div class="input__item">
-                                <input type="text" placeholder="Email address">
-                                <span class="icon_mail"></span>
-                            </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="Password">
-                                <span class="icon_lock"></span>
-                            </div>
-                            <button type="submit" class="site-btn">Login Now</button>
-                        </form>
-                        <a href="#" class="forget_pass">Forgot Your Password?</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="login__register">
-					<div class="product__item__pic set-bg" data-setbg="img/contents/inside.jpg">	
-                    </div>
-                </div>
-            </div>
-            <div class="login__social">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="login__social__links">
-                            <span></span>
-                            <ul>
-                            
-                            </ul>
-                        </div>
+                        <% if (session.getAttribute("userId") != null) { %>
+                            <a href="mypage.jsp"><span class="arrow_right_alt"></span> Logout</a>
+                        <% } else { %>
+                             <a href="./join.jsp"><span class="arrow_right_alt"></span> join</a>            
+                        <a href="./login.jsp"><span class="icon_profile"></span> Login</a>
+                        <% } %>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Login Section End -->
-
-   <!-- Footer Section Begin -->
-<footer class="footer">
-    <div class="page-up">
-        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        <div id="mobile-menu-wrap"></div>
     </div>
+</header>
+<!-- Header End -->
+
+<!-- Normal Breadcrumb Begin -->
+<section class="normal-breadcrumb set-bg" data-setbg="img/ott.png">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="footer__logo">
-                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Login</h2>
+                    <p>Welcome to the High Five OTT</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+
+<!-- Login Section Begin -->
+<section class="login spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login__form">
+                    <h3>Login</h3>
+                    <form action="login.jsp" method="post">
+                        <div class="input__item">
+                            <input type="text" placeholder="Email address" name="id">
+                            <span class="icon_mail"></span>
+                        </div>
+                        <div class="input__item">
+                            <input type="text" placeholder="Password" name="password">
+                            <span class="icon_lock"></span>
+                        </div>
+                        <button type="submit" class="site-btn">Login Now</button>
+                    </form>
+                    <a href="#" class="forget_pass">Forgot Your Password?</a>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="footer__nav">
-                    <ul>
-                        <li class="active"><a href="./index.jsp">HomePage</a></li>
-                        <li><a href="./contents.jsp">Contents</a></li>
-                        <li><a href="./mypage.jsp">My Page</a></li>
-                    </ul>
+                <div class="login__register">
+                                    <div class="product__item__pic set-bg" data-setbg="img/contents/inside.jpg">
                 </div>
             </div>
-            <div class="col-lg-3">
-                <p>
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with</i> by DoHyun LEE</a>
-                 </p>
+        </div>
+        <div class="login__social">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6">
+                    <div class="login__social__links">
+                        <span></span>
+                        <ul>
 
-              </div>
-          </div>
-      </div>
-  </footer>
-  <!-- Footer Section End -->
-
-      <!-- Search model Begin -->
-      <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Search model end -->
+</section>
+<!-- Login Section End -->
 
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+<!-- Footer Section Begin -->
+<footer class="footer">
+<div class="page-up">
+    <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="footer__logo">
+                <a href="./index.html"><img src="img/logo.png" alt=""></a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="footer__nav">
+                <ul>
+                    <li class="active"><a href="./index.jsp">HomePage</a></li>
+                    <li><a href="./contents.jsp">Contents</a></li>
+                    <li><a href="./mypage.jsp">My Page</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <p>
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with</i> by DoHyun LEE</a>
+             </p>
+
+          </div>
+      </div>
+  </div>
+</footer>
+<!-- Footer Section End -->
+
+  <!-- Search model Begin -->
+  <div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/player.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
 
 
 </body>
