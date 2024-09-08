@@ -8,6 +8,6 @@ entries:
     digest: e362a6e71124754170b6875ffe9d92be172d9d1ed76c605532af85084f780b92
     name: yaml3
     urls:
-    - https://ryuyoungsu.github.io/AWS_project/META-INF/yaml3-1.0.0.tgz
+    - https://ryuyoungsu.github.io/AWS_project/yaml3/yaml3-1.0.0.tgz
     version: 1.0.0
 generated: "2024-09-08T17:32:22.860452118Z"
